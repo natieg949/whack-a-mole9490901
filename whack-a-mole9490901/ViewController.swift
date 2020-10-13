@@ -12,6 +12,30 @@ class ViewController: UIViewController {
 
     var screenWidth = 0
     var screenHeight = 0
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        
+        let screenBounds: CGRect = UIScreen.main.bounds
+        screenWidth = Int(screenBounds.width)
+        screenHeight = Int(screenBounds.height)
+        
+        //score
+        let score = UILabel()
+        score.frame = CGRect(x: 20, y: 20, width: 100, height: screenHeight/10)
+        score.text = "0"
+        view.addSubview(score)
+        self.view = view
+        
+        //feild
+        let feild = UILabel()
+        feild.frame = CGRect(x: 20, y: 80, width: screenWidth - 40, height: screenHeight - 100)
+        feild.backgroundColor = UIColor.green
+        view.addSubview(feild)
+        self.view = view
+    /*var screenWidth = 0
+    var screenHeight = 0
     var horizLbl = UILabel()
     var vertLbl = UILabel()
     
@@ -49,7 +73,7 @@ class ViewController: UIViewController {
         horizLbl.frame = CGRect(x: 20, y: 100, width: screenWidth - 40, height: 50)
         horizLbl.text = "Screen width: \(screenWidth), Lable width: \(screenWidth - 40)"
         vertLbl.frame = CGRect(x: 50, y: 20, width: 50, height: screenHeight - 40)
-        vertLbl.text = "Screen height: \(screenHeight), Label height: \(screenHeight - 40)"
+        vertLbl.text = "Screen height: \(screenHeight), Label height: \(screenHeight - 40)"*/
     }
 }
 
