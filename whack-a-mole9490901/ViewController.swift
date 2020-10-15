@@ -12,6 +12,7 @@ class ViewController: UIViewController {
 
     var screenWidth = 0
     var screenHeight = 0
+    var mole = UIButton()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,7 @@ class ViewController: UIViewController {
         screenHeight = Int(screenBounds.height)
         
         //score
-        let score = UILabel()
+        var score = UILabel()
         score.frame = CGRect(x: 20, y: 20, width: 100, height: screenHeight/10)
         score.text = "0"
         view.addSubview(score)
@@ -34,46 +35,28 @@ class ViewController: UIViewController {
         feild.backgroundColor = UIColor.green
         view.addSubview(feild)
         self.view = view
-    /*var screenWidth = 0
-    var screenHeight = 0
-    var horizLbl = UILabel()
-    var vertLbl = UILabel()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
-        let screenBounds: CGRect = UIScreen.main.bounds
-        screenWidth = Int(screenBounds.width)
-        screenHeight = Int(screenBounds.height)
-        
-        horizLbl.frame = CGRect(x: 20, y: 100, width: screenWidth - 40, height: 50)
-        horizLbl.backgroundColor = UIColor.blue
-        horizLbl.text = "Screen width: \(screenWidth), Label width: \(screenWidth - 40)"
-        
-        view.addSubview(horizLbl)
-        
-        vertLbl.frame = CGRect(x: 50, y: 20, width: 5, height: screenHeight - 40)
-        vertLbl.backgroundColor = UIColor.red
-        vertLbl.text = "Screen height: \(screenHeight), Label height: \(screenHeight - 40)"
-        vertLbl.transform = CGAffineTransform(rotationAngle: .pi/2.0)
-        
-        view.addSubview(vertLbl)
+        //mole
+        mole.frame = CGRect(x: 200, y: 400, width: 40, height: 40)
+        mole.layer.cornerRadius = 20
+        mole.backgroundColor = UIColor.brown
+        mole.addTarget(self, action: #selector(hitMe(_:)), for: .touchUpInside)
+        view.addSubview(mole)
         self.view = view
     }
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
+    @objc func hitMe(_ sender:UIButton!) {
+        print("Got 'em!!")
+        mole.removeFromSuperview()
         
-        NSLog("bounds = \(self.view.bounds)")
+        //new mole
+        let randomDiameter = Int.random(in: 10...50)
+        let maxXRight = (screenWidth - 20) - randomDiameter
+        let maxYBottom = (screenHeight - 20) - randomDiameter
+        let randomX = Int.random(in: 20...maxXRight)
+        let randomY = Int.random(in: 20...maxYBottom)
         
-        let screenBounds: CGRect = UIScreen.main.bounds
-        screenWidth = Int(screenBounds.width)
-        screenHeight = Int(screenBounds.height)
-        
-        horizLbl.frame = CGRect(x: 20, y: 100, width: screenWidth - 40, height: 50)
-        horizLbl.text = "Screen width: \(screenWidth), Lable width: \(screenWidth - 40)"
-        vertLbl.frame = CGRect(x: 50, y: 20, width: 50, height: screenHeight - 40)
-        vertLbl.text = "Screen height: \(screenHeight), Label height: \(screenHeight - 40)"*/
+        mole.frame = CGRect(x: randomX, y: randomY, width: randomDiameter, height: randomDiameter)
+        mole.layer.cornerRadius = CGFloat(randomDiameter/2)   // make radius 1/2 width
+        view.addSubview(mole)
     }
 }
-
