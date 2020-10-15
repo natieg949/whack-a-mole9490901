@@ -13,7 +13,13 @@ class ViewController: UIViewController {
     var screenWidth = 0
     var screenHeight = 0
     var mole = UIButton()
-    
+    var scoreLbl = UILabel()
+    var score: Int = 0  {
+        didSet  {
+            scoreLbl.text = "\(score)"
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -23,10 +29,10 @@ class ViewController: UIViewController {
         screenHeight = Int(screenBounds.height)
         
         //score
-        var score = UILabel()
-        score.frame = CGRect(x: 20, y: 20, width: 100, height: screenHeight/10)
-        score.text = "0"
-        view.addSubview(score)
+        score = 0
+        scoreLbl.frame = CGRect(x: 20, y: 20, width: 100, height: screenHeight/10)
+        scoreLbl.text = String(score)
+        view.addSubview(scoreLbl)
         self.view = view
         
         //feild
@@ -47,6 +53,7 @@ class ViewController: UIViewController {
     @objc func hitMe(_ sender:UIButton!) {
         print("Got 'em!!")
         mole.removeFromSuperview()
+        score += 1
         
         /*new mole
         let randomDiameter = Int.random(in: 10...50)
