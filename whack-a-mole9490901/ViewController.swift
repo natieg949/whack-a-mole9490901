@@ -48,7 +48,7 @@ class ViewController: UIViewController {
         print("Got 'em!!")
         mole.removeFromSuperview()
         
-        //new mole
+        /*new mole
         let randomDiameter = Int.random(in: 10...50)
         let maxXRight = (screenWidth - 20) - randomDiameter
         let maxYBottom = (screenHeight - 20) - randomDiameter
@@ -57,6 +57,6 @@ class ViewController: UIViewController {
         
         mole.frame = CGRect(x: randomX, y: randomY, width: randomDiameter, height: randomDiameter)
         mole.layer.cornerRadius = CGFloat(randomDiameter/2)   // make radius 1/2 width
-        view.addSubview(mole)
+        view.addSubview(mole)*/
     }
 }
