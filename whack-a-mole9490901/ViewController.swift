@@ -19,7 +19,7 @@ class ViewController: UIViewController {
             scoreLbl.text = "\(score)"
         }
     }
-
+    var timer = Timer()
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -49,21 +49,47 @@ class ViewController: UIViewController {
         mole.addTarget(self, action: #selector(hitMe(_:)), for: .touchUpInside)
         view.addSubview(mole)
         self.view = view
+        
+        //timer
+        if (score != 10) {
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(missedButton(_:)), userInfo: nil, repeats: true)
+        }
     }
+    
     @objc func hitMe(_ sender:UIButton!) {
-        print("Got 'em!!")
         mole.removeFromSuperview()
-        score += 1
-        
-        /*new mole
-        let randomDiameter = Int.random(in: 10...50)
-        let maxXRight = (screenWidth - 20) - randomDiameter
-        let maxYBottom = (screenHeight - 20) - randomDiameter
-        let randomX = Int.random(in: 20...maxXRight)
-        let randomY = Int.random(in: 20...maxYBottom)
-        
-        mole.frame = CGRect(x: randomX, y: randomY, width: randomDiameter, height: randomDiameter)
-        mole.layer.cornerRadius = CGFloat(randomDiameter/2)   // make radius 1/2 width
-        view.addSubview(mole)*/
+        if (score != 10) {
+            score += 1
+            timer.invalidate()
+            let randomDiameter = Int.random(in: 10...50)
+            let maxXRight = (screenWidth - 40) - randomDiameter
+            let maxYBottom = (screenHeight - 100) - randomDiameter
+            let randomX = Int.random(in: 20...maxXRight)
+            let randomY = Int.random(in: 80...maxYBottom)
+            
+            mole.frame = CGRect(x: randomX, y: randomY, width: randomDiameter, height: randomDiameter)
+            mole.layer.cornerRadius = CGFloat(randomDiameter/2)   // make radius 1/2 width
+            view.addSubview(mole)
+            
+            timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(missedButton(_:)), userInfo: nil, repeats: true)
+        }
+    }
+    
+    @objc func missedButton(_ sender:UIButton!) {
+        mole.removeFromSuperview()
+        if (score != 10) {
+            if (score != 0)  {
+                score -= 1
+            }
+            let randomDiameter = Int.random(in: 10...50)
+            let maxXRight = (screenWidth - 40) - randomDiameter
+            let maxYBottom = (screenHeight - 100) - randomDiameter
+            let randomX = Int.random(in: 20...maxXRight)
+            let randomY = Int.random(in: 80...maxYBottom)
+            
+            mole.frame = CGRect(x: randomX, y: randomY, width: randomDiameter, height: randomDiameter)
+            mole.layer.cornerRadius = CGFloat(randomDiameter/2)   // make radius 1/2 width
+            view.addSubview(mole)
+        }
     }
 }
