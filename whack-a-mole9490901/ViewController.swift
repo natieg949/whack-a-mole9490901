@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
     var screenWidth = 0
     var screenHeight = 0
     var mole = UIButton()
@@ -20,6 +20,7 @@ class ViewController: UIViewController {
         }
     }
     var timer = Timer()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
